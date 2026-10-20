@@ -1,0 +1,28 @@
+### Pokemon by name
+GET http://localhost:8080/api/pokemon/clefairy
+
+### Create favorite
+POST http://localhost:8080/api/collection
+Content-Type: application/json
+
+{
+  "pokemonName": "pikachu",
+  "nickname": "Mein Starter"
+}
+
+### Get all favorites
+GET http://localhost:8080/api/collection
+
+### Get favorite by id (UUID einsetzen)
+GET http://localhost:8080/api/collection/{{id}}
+
+### Update nickname
+PUT http://localhost:8080/api/collection/{{id}}
+Content-Type: application/json
+
+{
+  "nickname": "Arena-Champion"
+}
+
+### Delete favorite
+DELETE http://localhost:8080/api/collection/{{id}}
