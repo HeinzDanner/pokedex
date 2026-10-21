@@ -1,5 +1,6 @@
 package de.heinzdanner.pokedex.common;
 
+import de.heinzdanner.pokedex.collection.CollectionEntryNotFoundException;
 import de.heinzdanner.pokedex.pokemon.PokemonNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -16,6 +17,12 @@ public class GlobalExceptionHandler {
         return new ErrorResponse(ex.getMessage(), LocalDateTime.now());
     }
 
+    @ExceptionHandler(CollectionEntryNotFoundException.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public ErrorResponse handleCollectionNotFound(CollectionEntryNotFoundException ex) {
+        return new ErrorResponse(ex.getMessage(), LocalDateTime.now());
+    }
+
     @ExceptionHandler(MethodArgumentNotValidException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ErrorResponse handleValidation(MethodArgumentNotValidException ex) {
@@ -28,4 +35,5 @@ public class GlobalExceptionHandler {
 
     public record ErrorResponse(String message, LocalDateTime timestamp) {
     }
+
 }
